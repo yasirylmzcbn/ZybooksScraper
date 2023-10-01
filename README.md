@@ -13,7 +13,7 @@ Go to Canvas > Open the Gradebook > Click Export > Export Entire Gradebook > Ren
 Run this command and fill out the information to get the updated gradebook:<br>
 ```streamlit run main.py```<br><br>
 Import the updated gradebook to Canvas:<br>
-Go to Canvas > Open the Gradebook > Click Import > Choose File (should be named updatedGRADEBOOK.csv in the ZybooksScraper directory) > Upload Data<br><br>
+Go to Canvas > Open the Gradebook > Click Import > Choose File (the GRADEBOOK.csv file in the ZybooksScraper directory) > Upload Data<br><br>
 It may take a few minutes for the grades to be fully imported, check back in a few minutes to ensure everything is imported properly.<br>
 
 ## Technologies Used:
