@@ -10,7 +10,7 @@ Download required libraries (you can create a venv first if you'd like):<br>
 ## Instructions:
 Download the newest version of the gradebook from Canvas as a csv:<br>
 Go to Canvas > Open the Gradebook > Click Export > Export Entire Gradebook > Rename downloaded file to GRADEBOOK.csv > Put the file in the ZybooksScraper folder<br><br>
-Run this command and fill out the information to get the updated gradebook:
+Run this command and fill out the information to get the updated gradebook:<br>
 ```streamlit run main.py```<br><br>
 Import the updated gradebook to Canvas:<br>
 Go to Canvas > Open the Gradebook > Click Import > Choose File (should be named updatedGRADEBOOK.csv in the ZybooksScraper directory) > Upload Data<br><br>
