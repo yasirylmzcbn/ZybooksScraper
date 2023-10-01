@@ -8,11 +8,6 @@ from fuzzywuzzy import process, fuzz
 import json
 import csv
 
-# labNumber = 2 # lab number
-# assignmentType = "(team)" # "(individual)" or "(team)"
-# prof = "Wickliff" # professor name
-# canvasName = "LAB: Topic 2 (team) part 2 (1811112)" # the name of the column in the gradebook.csv file that you want to update
-# numPages = 37 # the number of pages of students in zybooks
 class Scraper:
     def __init__(self, email, password, labNumber, assignmentType, prof, numPages, canvasName):    
         self.names = []
@@ -87,10 +82,6 @@ class Scraper:
         # enter the data to json
         with open(f'{self.prof}_lab{self.labNumber}_{self.assignmentType}_grades.json', 'w+') as jsonFile:
             json.dump(self.gradesDict, jsonFile)
-
-    # login_to_zybooks()
-    # get_zybooks_grades()
-
 
 
     def get_first_last(self, s):
