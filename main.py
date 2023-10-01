@@ -26,7 +26,7 @@ if startBut:
         lines = f.readlines()
         for line in lines:
             if f'LAB: Topic {labNumber} {assignmentType}' in line:
-                canvasName = line
+                canvasName = line.strip()
                 print("new canvas name:", canvasName)
                 break
             
@@ -35,4 +35,9 @@ if startBut:
     scraper.login_to_zybooks()
     scraper.get_zybooks_grades()
     scraper.update_csv()
+    os.rename('GRADEBOOK.csv', 'oldGRADEBOOK.csv')
+    os.rename('updatedGRADEBOOK.csv', 'GRADEBOOK.csv')
+    if os.path.exists('oldGRADEBOOK.csv'):
+        os.remove('oldGRADEBOOK.csv')
+        
     sl.write("Done! 🎉")

@@ -57,7 +57,7 @@ class Scraper:
             profSelect.click()
             
             for page in range(self.numPages):
-                student_names = WebDriverWait(self.driver, 45).until(EC.presence_of_element_located((By.XPATH, "//div[@class='list flex flex-col']")))
+                student_names = WebDriverWait(self.driver, 120).until(EC.presence_of_element_located((By.XPATH, "//div[@class='list flex flex-col']")))
                 student_names = student_names.find_elements(By.XPATH, "//span[@class='student-header']")
                 student_rows = WebDriverWait(self.driver, 30).until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='flex pr-11']")))
                 i = 1

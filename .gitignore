@@ -2,3 +2,5 @@
 *.json
 *.env
 creds/credentials.env
+venv
+__pycache__
