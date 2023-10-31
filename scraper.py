@@ -1,3 +1,5 @@
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -19,7 +21,7 @@ class Scraper:
         self.prof = prof
         self.numPages = numPages
         self.canvasName = canvasName
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
         self.driver.maximize_window()
 
     def login_to_zybooks(self):
@@ -35,7 +37,7 @@ class Scraper:
         # get the grades
         WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//i[@aria-label='assignment']"))).click()
         assignment = f"Lab Topic {self.labNumber} {self.assignmentType}".strip()
-        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, f"//h3[contains(text(), '{assignment}')]"))).click()
+        WebDriverWait(self.driver, 12).until(EC.element_to_be_clickable((By.XPATH, f"//h3[contains(text(), '{assignment}')]"))).click()
         labs = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.XPATH, "//ul[@class='section-list pr-2']")))
         labs = labs.find_elements(By.TAG_NAME, "li")
         index = 0
@@ -51,7 +53,7 @@ class Scraper:
             showButtons = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.XPATH, "//div[@class='content-resource programming-submission-payload ember-view']")))
             showButtons = showButtons.find_elements(By.XPATH, "//span[contains(text(), 'Show')]")
             showButtons[2].click()
-            WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.XPATH, "//div[contains(text(), 'Section Alvarado (540/541)')]"))).click()
+            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//div[@class='title-trigger' and text()='Section Alvarado (540/541)']"))).click()
             
             profSelect = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.XPATH, f"//span[contains(text(), '{self.prof}')]")))
             profSelect.click()
@@ -106,7 +108,6 @@ class Scraper:
         gradebook = csv.DictReader(open('GRADEBOOK.csv', 'r', encoding="utf-8"))
         updatedGradebook = csv.DictWriter(open('updatedGRADEBOOK.csv', 'w', newline='', encoding="utf-8"), fieldnames=gradebook.fieldnames)
         updatedGradebook.writeheader()
-        # gradesDict = json.loads(open(f'{prof}_lab{labNumber}_{assignmentType}_grades.json', 'r').read())
 
         firstTime = True
         index = 0
